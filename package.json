@@ -1,0 +1,27 @@
+var classRegCode = ["CMUSE450201901001"]; //thu nghiem
+var year = 65,
+    semester = 66,
+    studentIdNumber = 2221724320,
+    curriculumId = "448",
+    key = "AMINHAKEYTEM32NYTES1234567891234",
+    iv = "7061737323313233";
+
+$("head").append("<script type='text/javascript' src='https://mydtu.duytan.edu.vn/js/aes.js'></script>");
+$("head").append("<script type='text/javascript' src='https://mydtu.duytan.edu.vn/admin/js/commonjs.js'></script>");
+
+classRegCode.forEach(function(classCode){	
+    $.ajax({
+        type: "POST",
+        url: "https://mydtu.duytan.edu.vn/Modules/regonline/ajax/RegistrationProcessing.aspx/AddClassProcessing",
+        data: '{encryptedPara: "' + EncryptString(classCode + "," + year + "," + semester + "," + studentIdNumber + "," + curriculumId, key, iv) + '" }',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: true,
+        success: function() {
+            console.log("AddClassProcessing: " + classCode);
+        },
+        complete: function(response) {
+            console.log("AddClassSuccessful: " + classCode + ": "+ $.parseJSON(response.responseText).d);
+        }
+    });
+});
