@@ -2,6 +2,7 @@
     "name": "node_chat_realtime",
     "version": "1.0.0",
     "description": "Demo chat realtime NodeJS",
+    "main": "index.js",
     "dependencies": {
         "socket.io": "^2.1.1",
         "express": "^4.16.3"
